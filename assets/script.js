@@ -1,6 +1,6 @@
 // Assignment Code
 
-// Document elements
+// Document IDs & classes
 var generateBtn = document.querySelector("#generate");
 var pCriteria = document.querySelector("#criteria");
 
@@ -10,37 +10,24 @@ var critUp = false;
 var critNum = true;
 var critSpec = false;
 
-// Lowercase characters
+// Characters
 var charLow = "abcdefghijklmnopqrstuvwxyz";
-
-// Uppercase characters
 var charUp = charLow.toUpperCase();
-
-// Special characters
+var charNum;
 var charSpec = "~!@#$%^&*";
 
-// Generate a random lowercase character
-function genLow() {
-  var lower = charLow.charAt(Math.floor(Math.random() * charLow.length));
-  return lower; 
-}
-
-// Generate a random uppercase character
-function genUp() {
-  var upper = charUp.charAt(Math.floor(Math.random() * charUp.length));
-  return upper; 
-} 
-
-// Generate a random number (0-9)
-function genNum() {
-  var number = Math.floor(Math.random() * 10);
-  return number; 
-}
-
-// Generate a random special character
-function genSpec() {
-  var special = charSpec.charAt(Math.floor(Math.random() * charSpec.length));
-  return special; 
+// Generate random characters (lower, upper, number & special) as determined by the type argument
+function genChar(type) {
+  if (type === charLow || type === charUp || type === charSpec ) {
+    var ranChar = type.charAt(Math.floor(Math.random() * type.length));
+  }
+  else if (type === charNum) {
+    var ranChar = Math.floor(Math.random() * 10);
+  }
+  else {
+    console.log("Invalid argument: 'type' for random character generation.");
+  }
+  return ranChar;
 }
 
 // Display the password criteria form

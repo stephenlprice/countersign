@@ -3,6 +3,7 @@
 // Document IDs & classes
 var generateBtn = document.querySelector("#generate");
 var pCriteria = document.querySelector("#criteria");
+var inputLow = document.querySelector("");
 
 // Password criteria (default values)
 var critLow = true;

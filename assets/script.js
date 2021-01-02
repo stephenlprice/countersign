@@ -3,7 +3,11 @@
 // Document IDs & classes
 var generateBtn = document.querySelector("#generate");
 var pCriteria = document.querySelector("#criteria");
-var inputLow = document.querySelector("");
+var inputLow = document.querySelector("#inputLow");
+var inputUp = document.querySelector("#inputUp");
+var inputNum = document.querySelector("#inputNum");
+var inputSpec = document.querySelector("#inputSpec");
+var inputLen = document.querySelector("#inputLen");
 
 // Password criteria (default values)
 var critLow = true;
@@ -75,8 +79,37 @@ function showCriteria() {
   passConsole.value = "Please select at least 1 character type and choose a password length";
 }
 
+// Uses checkbox values to alter password criteria booleans
+function inputCheck() {
+  if (this === inputLow) {
+    critLow = document.querySelector("#inputLow").checked;
+    return critLow;
+  }
+  else if (this === inputUp) {
+    critUp = document.querySelector("#inputUp").checked;
+    return critUp;
+  }
+  else if (this === inputNum) {
+    critNum = document.querySelector("#inputNum").checked;
+    return critNum;
+  }
+  else if (this === inputSpec) {
+    critSpec = document.querySelector("#inputSpec").checked;
+    return critSpec;
+  }
+  else {
+    console.log("Invalid input ID provided")
+  }
+}
+
 // Add event listener to generate button that will display the password criteria form
 generateBtn.addEventListener("click", showCriteria);
+
+// Event listeners for form inputs
+inputLow.addEventListener("input", inputCheck);
+inputUp.addEventListener("input", inputCheck);
+inputNum.addEventListener("input", inputCheck);
+inputSpec.addEventListener("input", inputCheck);
 
 // Add event listener to submit form input that will write the password using selected criteria
 

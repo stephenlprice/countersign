@@ -9,25 +9,46 @@ var critLow = true;
 var critUp = false;
 var critNum = true;
 var critSpec = false;
+var passLength = 10;
 
 // Characters
 var charLow = "abcdefghijklmnopqrstuvwxyz";
 var charUp = charLow.toUpperCase();
-var charNum;
+var charNum = "0123456789";
 var charSpec = "~!@#$%^&*";
 
-// Generate random characters (lower, upper, number & special) as determined by the type argument
-function genChar(type) {
-  if (type === charLow || type === charUp || type === charSpec ) {
-    var ranChar = type.charAt(Math.floor(Math.random() * type.length));
+// To avoid wrinting if statements for 16 possible combinations (4 character types), this simpler logic concatenates a master string
+function charConcat(l,u,n,s) {
+  var charSum = "";
+
+  if (l === true) {
+    charSum += charLow;
   }
-  else if (type === charNum) {
-    var ranChar = Math.floor(Math.random() * 10);
+  if (u === true) {
+    charSum += charUp;
   }
-  else {
-    console.log("Invalid argument: 'type' for random character generation.");
+  if (n === true) {
+    charSum += charNum;
   }
-  return ranChar;
+  if (s === true) {
+    charSum += charSpec;
+  }
+  if (l === false && u === false && n === false && s === false) {
+    console.log("ERROR: invalid inputs, please select at least 1 character type to generate a password");
+    var criteriaText = document.querySelector("#password");
+    criteriaText.value = "ERROR: invalid inputs, please select at least 1 character type to generate a password";
+  }
+  return charSum;
+}
+
+// Generate random characters (lower, upper, number & special) as determined by the master string 'charSum' and password length
+function (charSum, passLength) {
+  var countersign = "";
+  for (var i = 0; i <= passLength; i++) {
+    var ranChar = charSum.charAt(Math.floor(Math.random() * passLength.length));
+    countersign += ranChar[i];
+  }
+  return countersign;
 }
 
 // Display the password criteria form

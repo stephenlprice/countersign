@@ -4,20 +4,21 @@
 var generateBtn = document.querySelector("#generate");
 var pCriteria = document.querySelector("#criteria");
 
-// Password criteria
+// Password criteria (default values)
 var critLow = true;
 var critUp = false;
 var critNum = true;
 var critSpec = false;
 var passLength = 10;
 
-// Characters
+// Character pool
 var charLow = "abcdefghijklmnopqrstuvwxyz";
 var charUp = charLow.toUpperCase();
 var charNum = "0123456789";
 var charSpec = "~!@#$%^&*";
 
-// To avoid wrinting if statements for 16 possible combinations (4 character types), this simpler logic concatenates a master string
+// Create a string 'charString' from the character pool used to generate 
+// random characters based on user input or defaults if unchanged
 function charConcat(l,u,n,s) {
   var charSum = "";
 
@@ -35,25 +36,27 @@ function charConcat(l,u,n,s) {
   }
   if (l === false && u === false && n === false && s === false) {
     console.log("ERROR: invalid inputs, please select at least 1 character type to generate a password");
-    var criteriaText = document.querySelector("#password");
-    criteriaText.value = "ERROR: invalid inputs, please select at least 1 character type to generate a password";
+    var passConsole = document.querySelector("#password");
+    passConsole.value = "ERROR: invalid inputs, please select at least 1 character type to generate a password";
   }
   return charSum;
 }
 
-// Generate random characters (lower, upper, number & special) as determined by the master string 'charSum' and password length
-function (charSum, passLength) {
-  var countersign = "";
-  for (var i = 0; i <= passLength; i++) {
-    var ranChar = charSum.charAt(Math.floor(Math.random() * passLength.length));
-    countersign += ranChar[i];
+// Generate a random string of characters (lower, upper, number & special)
+// as determined by a character pool and password length
+function stringGen(charSum, passLength) {
+  var ranString = "";
+  for (var i = 0; i < passLength; i++) {
+    ranString += charSum.charAt(Math.floor(Math.random() * charSum.length));
   }
-  return countersign;
+  return ranString;
 }
 
-// Display the password criteria form
-function showCriteria() {
-  pCriteria.innerHTML = markupCriteria;
+// Generate a password
+function generatePassword () {
+  var charSet = charConcat(critLow, critUp, critNum, critSpec);
+  var countersign = stringGen(charSet, passLength);
+  return countersign;
 }
 
 // Write password to the #password input
@@ -62,7 +65,13 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
+}
 
+// Display the password criteria form
+function showCriteria() {
+  pCriteria.innerHTML = markupCriteria;
+  var passConsole = document.querySelector("#password");
+  passConsole.value = "Please select at least 1 character type and choose a password length";
 }
 
 // Add event listener to generate button that will display the password criteria form
@@ -92,5 +101,3 @@ var markupCriteria = `<form action="#" method="get">
 <input type="submit" value="Fill Password">
 <input type="reset" value="Reset">
 </form>`;
-
-

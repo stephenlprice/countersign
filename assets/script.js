@@ -4,6 +4,46 @@
 var generateBtn = document.querySelector("#generate");
 var pCriteria = document.querySelector("#criteria");
 
+// Password criteria
+var critLow = true;
+var critUp = false;
+var critNum = true;
+var critSpec = false;
+
+// Lowercase characters
+var charLow = "abcdefghijklmnopqrstuvwxyz";
+
+// Uppercase characters
+var charUp = charLow.toUpperCase();
+
+// Special characters
+var charSpec = "!@#$%^&*";
+
+// Generate random lowercase characters
+var lower = "";
+
+// Generate random numbers
+var number = Math.floor(Math.random() * 10) + 1;
+
+// Display the password criteria form
+function showCriteria() {
+  pCriteria.innerHTML = markupCriteria;
+}
+
+// Write password to the #password input
+function writePassword() {
+  var password = generatePassword();
+  var passwordText = document.querySelector("#password");
+
+  passwordText.value = password;
+
+}
+
+// Add event listener to generate button that will display the password criteria form
+generateBtn.addEventListener("click", showCriteria);
+
+// Add event listener to submit form input that will write the password using selected criteria
+
 // Inline HTML
 var markupCriteria = `<form action="#" method="get">
 <input type="checkbox" name="uppercase" value="upper">
@@ -26,24 +66,5 @@ var markupCriteria = `<form action="#" method="get">
 <input type="submit" value="Fill Password">
 <input type="reset" value="Reset">
 </form>`;
-
-// Display the password criteria form
-function showCriteria() {
-  pCriteria.innerHTML = markupCriteria;
-}
-
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
-
-}
-
-// Add event listener to generate button that will display the password criteria form
-generateBtn.addEventListener("click", showCriteria);
-
-// Add event listener to submit form input that will write the password using selected criteria
 
 

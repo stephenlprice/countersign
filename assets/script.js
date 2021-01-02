@@ -17,13 +17,31 @@ var charLow = "abcdefghijklmnopqrstuvwxyz";
 var charUp = charLow.toUpperCase();
 
 // Special characters
-var charSpec = "!@#$%^&*";
+var charSpec = "~!@#$%^&*";
 
-// Generate random lowercase characters
-var lower = "";
+// Generate a random lowercase character
+function genLow() {
+  var lower = charLow.charAt(Math.floor(Math.random() * charLow.length));
+  return lower; 
+}
 
-// Generate random numbers
-var number = Math.floor(Math.random() * 10) + 1;
+// Generate a random uppercase character
+function genUp() {
+  var upper = charUp.charAt(Math.floor(Math.random() * charUp.length));
+  return upper; 
+} 
+
+// Generate a random number (0-9)
+function genNum() {
+  var number = Math.floor(Math.random() * 10);
+  return number; 
+}
+
+// Generate a random special character
+function genSpec() {
+  var special = charSpec.charAt(Math.floor(Math.random() * charSpec.length));
+  return special; 
+}
 
 // Display the password criteria form
 function showCriteria() {

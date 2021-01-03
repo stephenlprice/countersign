@@ -24,7 +24,7 @@
             aria-label="Generated Password"
           ></textarea>
           <div>
-            <form id="criteria" action="./index.html" method="post">
+            <form id="criteria">
               <input id="inputUp" type="checkbox" name="uppercase" value="upper">
               <label for="uppercase">Uppercase</label>
 
@@ -42,9 +42,9 @@
               <input id="inputLen" type="range" id="pLength" name="length" oninput="this.nextElementSibling.value=this.value" min="8" max="128" value="10" step="1">
               <output>10</output><br><br>
 
-              <input id="inputFill" type="submit" value="Fill Password">
               <input id="inputReset" type="reset" value="Reset">
             </form>
+            <button id="inputWrite">Fill Password</button>
           </div>
         </div>
         <div class="card-footer">

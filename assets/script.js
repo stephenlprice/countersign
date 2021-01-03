@@ -3,6 +3,7 @@
 // Document IDs & classes
 var generateBtn = document.querySelector("#generate");
 var writeBtn = document.querySelector("#write");
+var pControls = document.querySelector("#controls");
 var pCriteria = document.querySelector("#criteria");
 var inputLow = document.querySelector("#inputLow");
 var inputUp = document.querySelector("#inputUp");
@@ -114,13 +115,20 @@ function inputCheck() {
   }
 }
 
-// Display the password criteria form
+// Display or hide the password criteria form
 function showCriteria() {
-  pCriteria.innerHTML = markupCriteria;
-  var passConsole = document.querySelector("#password");
-  passConsole.value = "Please select at least 1 character type and set a password length";
+  if (pControls.style.display === "none") {
+    pControls.style.display = "block";
+    var passConsole = document.querySelector("#password");
+    passConsole.value = "Please select at least 1 character type and set a password length";
+  }
+  else if (pControls.style.display === "block") {
+    pControls.style.display = "none";
+    var passConsole = document.querySelector("#password");
+    passConsole.value = "Your Secure Password";
+  }
+  
 }
-
 
 // Add event listener to generate button that will display the password criteria form
 generateBtn.addEventListener("click", showCriteria);
@@ -137,26 +145,3 @@ resetBtn.addEventListener("click", inputCheck);
 
 // Submits form input that will write the password using selected criteria
 writeBtn.addEventListener("click", writePassword);
-
-// Inline HTML
-// var markupCriteria = `<form action="#" method="get">
-// <input type="checkbox" name="uppercase" value="upper">
-// <label for="uppercase">Uppercase</label>
-
-// <input type="checkbox" name="numeric" value="number" checked>
-// <label for="numeric">Numbers</label><br>
-
-
-// <input type="checkbox" name="lowercase" value="lower" checked>
-// <label for="lowercase">Lowercase</label>
-
-// <input type="checkbox" name="special" value="special">
-// <label for="special">Symbols</label><br><br>
-
-// <label for="length">Password Length <i>(8-128 characters)</i></label><br>
-// <input type="range" id="pLength" name="length" oninput="this.nextElementSibling.value=this.value" min="8" max="128" value="10" step="1">
-// <output>10</output><br><br>
-
-// <input type="submit" value="Fill Password">
-// <input type="reset" value="Reset">
-// </form>`;

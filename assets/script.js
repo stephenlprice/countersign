@@ -8,6 +8,8 @@ var inputUp = document.querySelector("#inputUp");
 var inputNum = document.querySelector("#inputNum");
 var inputSpec = document.querySelector("#inputSpec");
 var inputLen = document.querySelector("#inputLen");
+var inputReset = document.querySelector("#inputReset");
+var inputFill = document.querySelector("#inputFill");
 
 // Password criteria (default values)
 var critLow = true;
@@ -97,10 +99,21 @@ function inputCheck() {
     critSpec = document.querySelector("#inputSpec").checked;
     return critSpec;
   }
+  else if (this === inputLen) {
+    passLength = document.querySelector("#inputLen").value;
+  }
+  else if (this === pCriteria) {
+    critLow = document.querySelector("#inputLow").checked;
+    critUp = document.querySelector("#inputUp").checked;
+    critNum = document.querySelector("#inputNum").checked;
+    critSpec = document.querySelector("#inputSpec").checked;
+    passLength = document.querySelector("#inputLen").value;
+  }
   else {
     console.log("Invalid input ID provided")
   }
 }
+
 
 // Add event listener to generate button that will display the password criteria form
 generateBtn.addEventListener("click", showCriteria);
@@ -110,6 +123,8 @@ inputLow.addEventListener("input", inputCheck);
 inputUp.addEventListener("input", inputCheck);
 inputNum.addEventListener("input", inputCheck);
 inputSpec.addEventListener("input", inputCheck);
+inputLen.addEventListener("input", inputCheck);
+pCriteria.addEventListener("reset", inputCheck);
 
 // Add event listener to submit form input that will write the password using selected criteria
 

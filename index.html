@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-us">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,6 +23,32 @@
             placeholder="Your Secure Password"
             aria-label="Generated Password"
           ></textarea>
+
+          <section id="controls" style="display: none;">
+            <form id="criteria">
+              <input id="inputUp" type="checkbox" name="uppercase" value="upper">
+              <label for="uppercase">Uppercase</label>
+
+              <input id="inputNum" type="checkbox" name="numeric" value="number" checked>
+              <label for="numeric">Numbers</label><br>
+
+
+              <input id="inputLow" type="checkbox" name="lowercase" value="lower" checked>
+              <label for="lowercase">Lowercase</label>
+
+              <input id="inputSpec" type="checkbox" name="special" value="special">
+              <label for="special">Symbols</label><br><br>
+
+              <label for="length">Password Length <i>(8-128 characters)</i></label><br>
+              <input id="inputLen" type="range" id="pLength" name="length" oninput="this.nextElementSibling.value=this.value" min="8" max="128" value="10" step="1">
+              <output>10</output><br><br>
+            </form>
+
+            <div>
+              <button id="write">Fill Password</button>
+              <button id="reset">Reset</button>
+            </div>
+          </section>
         </div>
         <div class="card-footer">
           <button id="generate" class="btn">Generate Password</button>

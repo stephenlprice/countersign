@@ -2,15 +2,14 @@
 
 // Document IDs & classes
 var generateBtn = document.querySelector("#generate");
-var writeBtn = document.querySelector("#inputWrite");
+var writeBtn = document.querySelector("#write");
 var pCriteria = document.querySelector("#criteria");
 var inputLow = document.querySelector("#inputLow");
 var inputUp = document.querySelector("#inputUp");
 var inputNum = document.querySelector("#inputNum");
 var inputSpec = document.querySelector("#inputSpec");
 var inputLen = document.querySelector("#inputLen");
-var inputReset = document.querySelector("#inputReset");
-var inputFill = document.querySelector("#inputFill");
+var resetBtn = document.querySelector("#reset");
 
 // Password criteria (default values)
 var critLow = true;
@@ -76,13 +75,6 @@ function writePassword() {
   }
 }
 
-// Display the password criteria form
-function showCriteria() {
-  pCriteria.innerHTML = markupCriteria;
-  var passConsole = document.querySelector("#password");
-  passConsole.value = "Please select at least 1 character type and choose a password length";
-}
-
 // Uses checkbox & range inputs to alter password criteria values or resets them
 function inputCheck() {
   if (this === inputLow) {
@@ -104,19 +96,29 @@ function inputCheck() {
   else if (this === inputLen) {
     passLength = document.querySelector("#inputLen").value;
   }
-  else if (this === pCriteria) {
+  else if (this === resetBtn) {
+    pCriteria.reset();
     setTimeout(function() {
       critLow = document.querySelector("#inputLow").checked;
       critUp = document.querySelector("#inputUp").checked;
       critNum = document.querySelector("#inputNum").checked;
       critSpec = document.querySelector("#inputSpec").checked;
       passLength = document.querySelector("#inputLen").value;
+
+      var passConsole = document.querySelector("#password");
+      passConsole.value = "Your Secure Password";
     }, 10)
-    // setTimeout(function, milliseconds, param1, param2, ...)
   }
   else {
     console.log("Invalid input ID provided")
   }
+}
+
+// Display the password criteria form
+function showCriteria() {
+  pCriteria.innerHTML = markupCriteria;
+  var passConsole = document.querySelector("#password");
+  passConsole.value = "Please select at least 1 character type and set a password length";
 }
 
 
@@ -129,9 +131,11 @@ inputUp.addEventListener("input", inputCheck);
 inputNum.addEventListener("input", inputCheck);
 inputSpec.addEventListener("input", inputCheck);
 inputLen.addEventListener("input", inputCheck);
-pCriteria.addEventListener("reset", inputCheck);
 
-// Add event listener to submit form input that will write the password using selected criteria
+// Resets the form, made as seperate button for layout purposes
+resetBtn.addEventListener("click", inputCheck);
+
+// Submits form input that will write the password using selected criteria
 writeBtn.addEventListener("click", writePassword);
 
 // Inline HTML

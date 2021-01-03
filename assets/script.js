@@ -2,7 +2,14 @@
 
 // Document IDs & classes
 var generateBtn = document.querySelector("#generate");
+var writeBtn = document.querySelector("#write");
 var pCriteria = document.querySelector("#criteria");
+var inputLow = document.querySelector("#inputLow");
+var inputUp = document.querySelector("#inputUp");
+var inputNum = document.querySelector("#inputNum");
+var inputSpec = document.querySelector("#inputSpec");
+var inputLen = document.querySelector("#inputLen");
+var resetBtn = document.querySelector("#reset");
 
 // Password criteria (default values)
 var critLow = true;
@@ -34,11 +41,6 @@ function charConcat(l,u,n,s) {
   if (s === true) {
     charSum += charSpec;
   }
-  if (l === false && u === false && n === false && s === false) {
-    console.log("ERROR: invalid inputs, please select at least 1 character type to generate a password");
-    var passConsole = document.querySelector("#password");
-    passConsole.value = "ERROR: invalid inputs, please select at least 1 character type to generate a password";
-  }
   return charSum;
 }
 
@@ -61,43 +63,100 @@ function generatePassword () {
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
+  if (critLow === false && critUp === false && critNum === false && critSpec === false) {
+    console.log("ERROR: invalid inputs, please select at least 1 character type to generate a password");
+    var passConsole = document.querySelector("#password");
+    passConsole.value = "ERROR: invalid inputs, please select at least 1 character type to generate a password";
+  }
+  else {
+    var password = generatePassword();
+    var passwordText = document.querySelector("#password");
+    passwordText.value = password;
+  }
+}
 
-  passwordText.value = password;
+// Uses checkbox & range inputs to alter password criteria values or resets them
+function inputCheck() {
+  if (this === inputLow) {
+    critLow = document.querySelector("#inputLow").checked;
+    return critLow;
+  }
+  else if (this === inputUp) {
+    critUp = document.querySelector("#inputUp").checked;
+    return critUp;
+  }
+  else if (this === inputNum) {
+    critNum = document.querySelector("#inputNum").checked;
+    return critNum;
+  }
+  else if (this === inputSpec) {
+    critSpec = document.querySelector("#inputSpec").checked;
+    return critSpec;
+  }
+  else if (this === inputLen) {
+    passLength = document.querySelector("#inputLen").value;
+  }
+  else if (this === resetBtn) {
+    pCriteria.reset();
+    setTimeout(function() {
+      critLow = document.querySelector("#inputLow").checked;
+      critUp = document.querySelector("#inputUp").checked;
+      critNum = document.querySelector("#inputNum").checked;
+      critSpec = document.querySelector("#inputSpec").checked;
+      passLength = document.querySelector("#inputLen").value;
+
+      var passConsole = document.querySelector("#password");
+      passConsole.value = "Your Secure Password";
+    }, 10)
+  }
+  else {
+    console.log("Invalid input ID provided")
+  }
 }
 
 // Display the password criteria form
 function showCriteria() {
   pCriteria.innerHTML = markupCriteria;
   var passConsole = document.querySelector("#password");
-  passConsole.value = "Please select at least 1 character type and choose a password length";
+  passConsole.value = "Please select at least 1 character type and set a password length";
 }
+
 
 // Add event listener to generate button that will display the password criteria form
 generateBtn.addEventListener("click", showCriteria);
 
-// Add event listener to submit form input that will write the password using selected criteria
+// Event listeners for form inputs
+inputLow.addEventListener("input", inputCheck);
+inputUp.addEventListener("input", inputCheck);
+inputNum.addEventListener("input", inputCheck);
+inputSpec.addEventListener("input", inputCheck);
+inputLen.addEventListener("input", inputCheck);
+
+// Resets the form, made as seperate button for layout purposes
+resetBtn.addEventListener("click", inputCheck);
+
+// Submits form input that will write the password using selected criteria
+writeBtn.addEventListener("click", writePassword);
 
 // Inline HTML
-var markupCriteria = `<form action="#" method="get">
-<input type="checkbox" name="uppercase" value="upper">
-<label for="uppercase">Uppercase</label>
+// var markupCriteria = `<form action="#" method="get">
+// <input type="checkbox" name="uppercase" value="upper">
+// <label for="uppercase">Uppercase</label>
 
-<input type="checkbox" name="numeric" value="number" checked>
-<label for="numeric">Numbers</label><br>
+// <input type="checkbox" name="numeric" value="number" checked>
+// <label for="numeric">Numbers</label><br>
 
 
-<input type="checkbox" name="lowercase" value="lower" checked>
-<label for="lowercase">Lowercase</label>
+// <input type="checkbox" name="lowercase" value="lower" checked>
+// <label for="lowercase">Lowercase</label>
 
-<input type="checkbox" name="special" value="special">
-<label for="special">Symbols</label><br><br>
+// <input type="checkbox" name="special" value="special">
+// <label for="special">Symbols</label><br><br>
 
-<label for="length">Password Length <i>(8-128 characters)</i></label><br>
-<input type="range" id="pLength" name="length" oninput="this.nextElementSibling.value=this.value" min="8" max="128" value="10" step="1">
-<output>10</output><br><br>
+// <label for="length">Password Length <i>(8-128 characters)</i></label><br>
+// <input type="range" id="pLength" name="length" oninput="this.nextElementSibling.value=this.value" min="8" max="128" value="10" step="1">
+// <output>10</output><br><br>
 
-<input type="submit" value="Fill Password">
-<input type="reset" value="Reset">
-</form>`;
+// <input type="submit" value="Fill Password">
+// <input type="reset" value="Reset">
+// </form>`;

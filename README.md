@@ -1,16 +1,22 @@
 # Countersign
 
 ### A Javascript Password Generator hosted on Github pages.
+<br>
 
 ![countersign.png](./assets/images/countersign.png)
-
-Generate passwords up to 128 characters long with uppercase, lowercase, numbers and symbols. No one will bruteforce crack your password - *not even a quantum computer!*
-
-`(It's impossible to know if Schrodinger's password is safe or compromised. User discretion is advised.)`
+<br><br>
 
 **Get started creating secure passwords for your accounts here: [Countersign](https://stephenlprice.github.io/countersign/).**
+<br><br>
 
-<iframe src="https://stephenlprice.github.io/countersign/" title="Countersign Password Generator"></iframe>
+Generate passwords up to 128 characters long with uppercase, lowercase, numbers and symbols. No one will bruteforce crack your password - *not even a quantum computer!*
+<br><br>
+
+`(It's impossible to know if Schrodinger's password is safe or compromised. User discretion is advised.)`
+<br><br>
+
+<hr>
+<br>
 
 ## User Story
 
